@@ -1,14 +1,15 @@
 import os
 import sys
-import uvicorn
 
-# If your real main.py is inside a 'backend' folder, this line tells Python to look there
+# Ensure Python can see inside your backend directory
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
-# Import your actual FastAPI instance
-# NOTE: If your file is inside a folder named backend, use: from backend.main import app
-# NOTE: If your file is right in the root named main.py, use: from main import app
-from backend.main import app
+# 1. Try importing from the backend directory
+try:
+    from backend.main import app
+except ModuleNotFoundError:
+    # 2. Fallback if main.py is sitting directly in the root directory
+    from main import app
 
-if __name__ == "__main__":
-    uvicorn.run("application:app", host="0.0.0.0", port=80)
+# This exposes 'app' directly at the root level for Azure's automated runners
+# Oryx will automatically search for 'application:app' or 'app:app' on Port 80
