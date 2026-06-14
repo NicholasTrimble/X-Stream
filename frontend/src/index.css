@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+/* Define the v4 theme extension */
+@theme {
+  /* This creates utilities like bg-cyber-green, text-cyber-green, border-cyber-green/50 */
+  --color-cyber-green: #00ff41; 
+  --color-deep-black: #050505;
+}
+
+/* Base styles for the "hacker" vibe */
+@layer base {
+  body {
+    background-color: var(--color-deep-black);
+    color: #e0e0e0; /* A clean, slightly desaturated grey for main text */
+    font-family: 'Courier New', Courier, monospace; /* Monospace is essential */
+  }
+}
