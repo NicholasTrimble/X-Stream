@@ -29,13 +29,17 @@ def transcode_video_task(self, video_id: int, filename: str):
         db.commit()
 
     try:
+        # Cross-platform path switcher: Use standard 'ffmpeg' binary signature on 
+        # Linux containers (posix), fallback to explicit path on Windows local environment
+        ffmpeg_cmd = "ffmpeg" if os.name == "posix" else r"C:\Program Files\ffmpeg\bin\ffmpeg.exe"
+
         (
             ffmpeg
             .input(input_path)
             .output(output_path, vcodec='libx264', acodec='aac', crf=28, preset='fast')
             .overwrite_output()
             .run(
-                cmd=r"C:\Program Files\ffmpeg\bin\ffmpeg.exe", 
+                cmd=ffmpeg_cmd, 
                 capture_stdout=True, 
                 capture_stderr=True
             )
