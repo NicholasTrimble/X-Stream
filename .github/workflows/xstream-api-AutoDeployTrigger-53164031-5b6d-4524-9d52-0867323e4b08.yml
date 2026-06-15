@@ -35,12 +35,12 @@ jobs:
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}
+          # Tell Azure exactly where your existing Dockerfile lives:
+          dockerfilePath: backend/Dockerfile
           registryUsername: ${{ secrets.XSTREAMAPI_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.XSTREAMAPI_REGISTRY_PASSWORD }}
           containerAppName: xstream-api
           resourceGroup: xstream-backend-api
           imageToBuild: default/xstream-api:${{ github.sha }}
-          # Change this exact keyword to cmd:
-          cmd: 'uvicorn backend.main:app --host 0.0.0.0 --port 80'
 
 
