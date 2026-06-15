@@ -40,6 +40,7 @@ jobs:
           containerAppName: xstream-api
           resourceGroup: xstream-backend-api
           imageToBuild: default/xstream-api:${{ github.sha }}
-          startupCommand: 'uvicorn backend.main:app --host 0.0.0.0 --port 80'
+          # Change this exact keyword to cmd:
+          cmd: 'uvicorn backend.main:app --host 0.0.0.0 --port 80'
 
 
